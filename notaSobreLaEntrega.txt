@@ -1,0 +1,12 @@
+Nota de la entrega 
+
+Solo para recordar que el "input5.txt" no genera los resultados correctos. Por error en los datos de entrada.
+
+La carpeta de "my_results" son mis .txt con los resultados correctos, pero claro que puede correr el código para corroborar esto. Solo lo hice como ayuda para mí, e ir haciendo las pruebas.
+
+Soy de Mac y a veces al descomprimirse crea archivos extra que ni al caso, son solo los de .cpp .h y .txt
+
+Además añadiré él link de GitHub por cualquier posible error(esperemos que no haya ninguno).
+
+Saludos 
+Daniel Fuentes
