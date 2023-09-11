@@ -2,20 +2,21 @@
 // File: bill.h
 // Author: Daniel Emilio Fuentes Portaluppi
 // Date: 14/06/22
-// Description: Declaracion de la clase Bill
+// Description: Declaration of the Bill class
 // =========================================================
 
 #ifndef BILL_H
 #define BILL_H
 
-class Bill {
+class Bill
+{
 private:
   double limitAmount, currentDebt, totalMoneySpent;
 
 public:
   Bill();
   Bill(double);
-  Bill(const Bill&);
+  Bill(const Bill &);
 
   double getLimitAmount() const;
   double getCurrentDebt() const;
@@ -27,14 +28,26 @@ public:
   bool check(double) const;
 };
 
-Bill::Bill() { //Constructor
+/**
+ * @brief Construct a new Bill:: Bill object
+ *
+ */
+Bill::Bill()
+{
   limitAmount = 0;
   currentDebt = 0;
   totalMoneySpent = 0;
 }
 
-Bill::Bill(double limit){ //Constructor con un parametro (limit) e inicializa el resto de variables en 0
-  if (limit <= 0 ) {
+/**
+ * @brief Construct a new Bill:: Bill object
+ *
+ * @param limit
+ */
+Bill::Bill(double limit)
+{
+  if (limit <= 0)
+  {
     limit = 0;
   }
   limitAmount = limit;
@@ -42,43 +55,73 @@ Bill::Bill(double limit){ //Constructor con un parametro (limit) e inicializa el
   totalMoneySpent = 0;
 }
 
-
-Bill::Bill(const Bill &other) { //Constructor 
+/**
+ * @brief Construct a new Bill:: Bill object
+ *
+ * @param other
+ */
+Bill::Bill(const Bill &other)
+{ // Constructor
   limitAmount = other.limitAmount;
   currentDebt = other.currentDebt;
   totalMoneySpent = other.totalMoneySpent;
 }
 
-double Bill::getLimitAmount() const { //Getter
+/**
+ * @brief Get the Limit Amount object
+ *
+ * @return double
+ */
+double Bill::getLimitAmount() const
+{ // Getter
   return limitAmount;
 }
 
-double Bill::getCurrentDebt() const { //Getter
+/**
+ * @brief Get the Current Debt object
+ *
+ * @return double
+ */
+double Bill::getCurrentDebt() const
+{ // Getter
   return currentDebt;
 }
 
-double Bill::getTotalMoneySpent() const { //Getter
+/**
+ * @brief Get the Total Money Spent object
+ *
+ * @return double
+ */
+double Bill::getTotalMoneySpent() const
+{ // Getter
   return totalMoneySpent;
 }
 
-/* 
-Agrega cargos a la factura. 
-Si la cantidad es menor o igual 0, no debera hacer cambios. 
-*/
-void Bill::add(double amount){
-  if(amount > 0) {
+/**
+ * @brief Add to the current debt
+ *
+ * @param amount
+ */
+void Bill::add(double amount)
+{
+  if (amount > 0)
+  {
     currentDebt += amount;
   }
 }
 
-/* 
-Reduce la deuda en la cantidad dada. 
-Si la cantidad es menor o igual a 0, no debera hacer cambios. 
-Nunca se podra pagar más cantidad que la deuda actual. 
-*/
-void Bill::pay(double amount){
-  if (amount > 0) {
-    if (amount > currentDebt) {
+/**
+ * @brief Pay the current debt
+ *
+ *
+ * @param amount
+ */
+void Bill::pay(double amount)
+{
+  if (amount > 0)
+  {
+    if (amount > currentDebt)
+    {
       amount = currentDebt;
     }
     totalMoneySpent += amount;
@@ -86,25 +129,34 @@ void Bill::pay(double amount){
   }
 }
 
-
-/*
-Cambia el limite de crédito, siempre y cuando sea mayor a la deuda actual. 
-Si la cantidad es menor o igual a 0, no debera hacer cambios.
-*/
-void Bill::changeTheLimit(double limit){
-  if(limit > currentDebt){
+/**
+ * @brief Change the limit of the bill
+ *
+ * @param limit
+ */
+void Bill::changeTheLimit(double limit)
+{
+  if (limit > currentDebt)
+  {
     limitAmount = limit;
   }
 }
 
-/*
-Regresa verdadero si la cantidad mas la deuda actual no excede el limite de credito.
-*/
-bool Bill::check(double amount) const{
-  if(amount + currentDebt < limitAmount){
+/**
+ * @brief Check if the amount is less than the limit
+ *
+ * @param amount
+ * @return true
+ * @return false
+ */
+bool Bill::check(double amount) const
+{
+  if (amount + currentDebt < limitAmount)
+  {
     return true;
   }
-  else{
+  else
+  {
     return false;
   }
 }

@@ -2,7 +2,7 @@
 // File: customer.h
 // Author: Daniel Emilio Fuentes Portaluppi
 // Date: 15/06/22
-// Description: Implementación de la clase Costumer
+// Description: Implementation of the Customer class
 // =========================================================
 #ifndef CUSTOMER_H
 #define CUSTOMER_H
@@ -15,16 +15,17 @@
 
 using namespace std;
 
-class Customer {
+class Customer
+{
 private:
   int id, age, totalSpentTalkingTime, totalMessageSent, totalInternetUsage;
   string name;
-  Operator* op;
-  Bill* bill;
+  Operator *op;
+  Bill *bill;
 
 public:
-  Customer(int, string, int, Operator*, double);
-  Customer(const Customer&);
+  Customer(int, string, int, Operator *, double);
+  Customer(const Customer &);
   ~Customer();
 
   int getId() const;
@@ -33,25 +34,30 @@ public:
   int getTotalMessageSent() const;
   double getTotalInternetUsage() const;
   string getName() const;
-  Operator* getOperator() const;
-  Bill* getBill() const;
+  Operator *getOperator() const;
+  Bill *getBill() const;
 
-  void setOperator(Operator*);
+  void setOperator(Operator *);
 
   string toString() const;
 
-  void talk (int, Customer&);
-  void message(int, const Customer&);
+  void talk(int, Customer &);
+  void message(int, const Customer &);
   void connection(double);
   void pay(double);
 };
 
-/*
-Constructor con 5 parámetros. 
-Recibe el id, el nombre, la edad, el operador y el límite de crédito. 
-Se debe crear el objeto de la clase Bill.
-*/
-Customer::Customer(int _id, string _name, int _age, Operator *_op, double creditLimit){
+/**
+ * @brief Construct a new Customer:: Customer object
+ *
+ * @param _id
+ * @param _name
+ * @param _age
+ * @param _op
+ * @param creditLimit
+ */
+Customer::Customer(int _id, string _name, int _age, Operator *_op, double creditLimit)
+{
   id = _id;
   name = _name;
   age = _age;
@@ -62,7 +68,13 @@ Customer::Customer(int _id, string _name, int _age, Operator *_op, double credit
   totalInternetUsage = 0;
 }
 
-Customer::Customer(const Customer &c){ //Constructor
+/**
+ * @brief Construct a new Customer:: Customer object
+ *
+ * @param c
+ */
+Customer::Customer(const Customer &c)
+{ // Constructor
   id = c.id;
   name = c.name;
   age = c.age;
@@ -73,97 +85,160 @@ Customer::Customer(const Customer &c){ //Constructor
   totalInternetUsage = c.totalInternetUsage;
 }
 
-/*
-Destructor. 
-Debe eliminar la factura. 
-Todos los apuntadores debe ser igualados a nulo.
-*/
-Customer::~Customer(){
+/**
+ * @brief Destroy the Customer:: Customer object
+ *
+ */
+Customer::~Customer()
+{
   delete bill;
   bill = NULL;
   op = NULL;
 }
 
-int Customer::getId() const{ //Getter
+/**
+ * @brief Get the Id object
+ *
+ * @return int
+ */
+int Customer::getId() const
+{ // Getter
   return id;
 }
 
-int Customer::getAge() const{ //Getter
+/**
+ * @brief Get the Age object
+ *
+ * @return int
+ */
+int Customer::getAge() const
+{ // Getter
   return age;
 }
 
-int Customer::getTotalSpentTalkingTime() const{ //Getter
+/**
+ * @brief Get the Total Spent Talking Time object
+ *
+ * @return int
+ */
+int Customer::getTotalSpentTalkingTime() const
+{ // Getter
   return totalSpentTalkingTime;
 }
 
-int Customer::getTotalMessageSent() const{ //Getter
+/**
+ * @brief Get the Total Message Sent object
+ *
+ * @return int
+ */
+int Customer::getTotalMessageSent() const
+{ // Getter
   return totalMessageSent;
 }
 
-double Customer::getTotalInternetUsage() const{ //Getter
+/**
+ * @brief Get the Total Internet Usage object
+ *
+ * @return int
+ */
+double Customer::getTotalInternetUsage() const
+{ // Getter
   return totalInternetUsage;
 }
 
-string Customer::getName() const{ //Getter
+/**
+ * @brief Get the Name object
+ *
+ * @return string
+ */
+string Customer::getName() const
+{ // Getter
   return name;
 }
 
-Operator* Customer::getOperator() const{ //Getter
+/**
+ * @brief Get the Operator object
+ *
+ * @return Operator*
+ */
+Operator *Customer::getOperator() const
+{ // Getter
   return op;
 }
 
-Bill* Customer::getBill() const{ //Getter
+/**
+ * @brief Get the Bill object
+ *
+ * @return Bill*
+ */
+Bill *Customer::getBill() const
+{ // Getter
   return bill;
 }
 
-void Customer::setOperator(Operator* _op){ //Setter
+/**
+ * @brief Set the Operator object
+ *
+ * @param _op
+ */
+void Customer::setOperator(Operator *_op)
+{ // Setter
   op = _op;
 }
 
-/*
-Regresa un string con el siguiente formato: 
-"Customer #id : totalMoneySpend currentDebt". 
-Todas las cantidades de punto flotantes deben tener una precisión de dos números decimales.
-*/
-string Customer::toString() const{
+/**
+ * @brief Convert the object to string
+ *
+ * @return string
+ */
+string Customer::toString() const
+{
   stringstream aux;
 
   aux << fixed << setprecision(2);
-  aux << "Customer " << id << ": " << bill->getTotalMoneySpent() << " " << bill->getCurrentDebt()<<endl;  
+  aux << "Customer " << id << ": " << bill->getTotalMoneySpent() << " " << bill->getCurrentDebt() << endl;
   return aux.str();
 }
 
-/*
-Si la cantidad es mayor a 0 y other es un cliente diferente, se calcula el costo por los minutos que duró la llamada. 
-Si todavía hay límite de crédito en la factura, deberá agregar el costo a la factura y agregar los minutos empleados ...
-al conteo de nuestro cliente y su operador. 
-Si el operador de nuestro cliente y el other son diferentes, también deberá de agregarse esta cantidad al otro operador.
-*/
-void Customer::talk(int minutes, Customer &other){
+/**
+ * @brief Function that simulates a call between two customers
+ *
+ * @param minutes
+ * @param other
+ */
+void Customer::talk(int minutes, Customer &other)
+{
   double cost = 0;
-  if(minutes > 0 && id != other.id){
+  if (minutes > 0 && id != other.id)
+  {
     cost = op->calculateTalkingCost(minutes, age);
-    if(bill->check(cost)){
+    if (bill->check(cost))
+    {
       bill->add(cost);
       totalSpentTalkingTime += minutes;
       op->addTalkingTime(minutes);
-      if(other.op->getId() != op->getId()){
+      if (other.op->getId() != op->getId())
+      {
         other.op->addTalkingTime(minutes);
       }
     }
   }
 }
 
-/*
-Si la cantidad es mayor a 0 y other es un cliente diferente, se calcula el costo por los mensajes enviados. 
-Si todavía hay límite de crédito en la factura, deberá agregar el costo a la factura y agrega los mensajes enviados ... 
-en el conteo del cliente y del operador.
-*/
-void Customer::message(int quantity, const Customer &other){
+/**
+ * @brief Function that simulates a message between two customers
+ *
+ * @param quantity
+ * @param other
+ */
+void Customer::message(int quantity, const Customer &other)
+{
   double cost = 0;
-  if(quantity>0 && id != other.id){
+  if (quantity > 0 && id != other.id)
+  {
     cost = op->calculateMessageCost(quantity, op->getId(), other.op->getId());
-    if(bill->check(cost)){
+    if (bill->check(cost))
+    {
       bill->add(cost);
       totalMessageSent += quantity;
       op->addTotalMessageSent(quantity);
@@ -171,16 +246,19 @@ void Customer::message(int quantity, const Customer &other){
   }
 }
 
-/*
-Si la cantidad es mayor a 0, se calcula el costo por el uso de Internet. 
-Si todavía hay límite de crédito en la factura, deberá agregar el costo a la factura y agrega los GB utilizados tanto ... 
-en el conteo del cliente y del operador.
-*/
-void Customer::connection(double amount){
+/**
+ * @brief Function that simulates a connection between a customer and the internet
+ *
+ * @param amount
+ */
+void Customer::connection(double amount)
+{
   double cost = 0;
-  if(amount>0){
+  if (amount > 0)
+  {
     cost = op->calculateNetworkCost(amount);
-    if(bill->check(cost)){
+    if (bill->check(cost))
+    {
       bill->add(cost);
       totalInternetUsage += amount;
       op->addTotalInternetUsage(amount);
@@ -188,7 +266,13 @@ void Customer::connection(double amount){
   }
 }
 
-void Customer::pay(double amount){
+/**
+ * @brief Function that simulates a payment of a customer
+ *
+ * @param amount
+ */
+void Customer::pay(double amount)
+{
   bill->pay(amount);
 }
 

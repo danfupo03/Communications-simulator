@@ -2,7 +2,7 @@
 // File: operator.h
 // Author: Daniel Emilio Fuentes Portaluppi
 // Date: 14/06/22
-// Description: Implementación de la clase padre, Operator
+// Description: Implementation of the Operator class
 // =========================================================
 
 #ifndef OPERATOR_H
@@ -15,9 +15,14 @@
 
 using namespace std;
 
-typedef enum{VOX, INTERNET} OperatorType;
+typedef enum
+{
+  VOX,
+  INTERNET
+} OperatorType;
 
-class Operator {
+class Operator
+{
 protected:
   int id, discountRate;
   double talkingCharge, messageCost, networkCharge, totalInternetUsage;
@@ -26,7 +31,7 @@ protected:
 
 public:
   Operator(int, double, double, double, int, OperatorType);
-  Operator(const Operator&);
+  Operator(const Operator &);
 
   int getId() const;
   int getDiscountRate() const;
@@ -49,13 +54,18 @@ public:
   virtual double calculateNetworkCost(double) = 0;
 };
 
-/*
-Constructor con 6 parámetros. 
-Recibe el id, el costo por minuto de llamada, el costo por envío de mensaje, ...
-el costo por GB, el porcentaje de descuento y el tipo de operador. 
-El resto de las variables debe inicializarse a 0.
-*/
-Operator::Operator(int _id, double _talkingCharge, double _messageCost, double _networkCharge, int _discountRate, OperatorType _type){
+/**
+ * @brief Construct a new Operator:: Operator object
+ *
+ * @param _id
+ * @param _talkingCharge
+ * @param _messageCost
+ * @param _networkCharge
+ * @param _discountRate
+ * @param _type
+ */
+Operator::Operator(int _id, double _talkingCharge, double _messageCost, double _networkCharge, int _discountRate, OperatorType _type)
+{
   id = _id;
   talkingCharge = _talkingCharge;
   messageCost = _messageCost;
@@ -67,7 +77,13 @@ Operator::Operator(int _id, double _talkingCharge, double _messageCost, double _
   totalMessageSent = 0;
 }
 
-Operator::Operator(const Operator &op){ //Constructor
+/**
+ * @brief Construct a new Operator:: Operator object
+ *
+ * @param op
+ */
+Operator::Operator(const Operator &op)
+{ // Constructor
   id = op.id;
   talkingCharge = op.talkingCharge;
   messageCost = op.messageCost;
@@ -79,80 +95,147 @@ Operator::Operator(const Operator &op){ //Constructor
   totalMessageSent = op.totalMessageSent;
 }
 
-int Operator::getId() const{ //Getter
+/**
+ * @brief Getter of the id
+ *
+ * @return int
+ */
+int Operator::getId() const
+{ // Getter
   return id;
 }
 
-int Operator::getDiscountRate() const{ //Getter
+/**
+ * @brief Getter of the discount rate
+ *
+ * @return int
+ */
+int Operator::getDiscountRate() const
+{ // Getter
   return discountRate;
 }
 
-double Operator::getTalkingCharge() const{ //Getter
+/**
+ * @brief Getter of the talking charge
+ *
+ * @return double
+ */
+double Operator::getTalkingCharge() const
+{ // Getter
   return talkingCharge;
 }
 
-double Operator::getMessageCost() const{ //Getter
+/**
+ * @brief Getter of the message cost
+ *
+ * @return double
+ */
+double Operator::getMessageCost() const
+{ // Getter
   return messageCost;
 }
 
-double Operator::getNetworkCharge() const{ //Getter
+/**
+ * @brief Getter of the network charge
+ *
+ * @return double
+ */
+double Operator::getNetworkCharge() const
+{ // Getter
   return networkCharge;
 }
 
-int Operator::getTotalSpentTalkingTime() const{ //Getter
+/**
+ * @brief Getter of the total spent talking time
+ *
+ * @return int
+ */
+int Operator::getTotalSpentTalkingTime() const
+{ // Getter
   return totalSpentTalkingTime;
 }
 
-int Operator::getTotalMessageSent() const{ //Getter
+/**
+ * @brief Getter of the total message sent
+ *
+ * @return int
+ */
+int Operator::getTotalMessageSent() const
+{ // Getter
   return totalMessageSent;
 }
 
-double Operator::getTotalInternetUsage() const{ //Getter
+/**
+ * @brief Getter of the total internet usage
+ *
+ * @return double
+ */
+double Operator::getTotalInternetUsage() const
+{ // Getter
   return totalInternetUsage;
 }
 
-OperatorType Operator::getType() const{ //Getter
+/**
+ * @brief Getter of the type
+ *
+ * @return OperatorType
+ */
+OperatorType Operator::getType() const
+{ // Getter
   return type;
 }
 
-/*
- Si la cantidad es mayor a 0, agrega la cantidad al tiempo total que se ha empleado en llamadas.
-*/
-void Operator::addTalkingTime(int minute){
-  if(minute > 0){
+/**
+ * @brief Adds the talking time to the total spent talking time
+ *
+ * @param minute
+ */
+void Operator::addTalkingTime(int minute)
+{
+  if (minute > 0)
+  {
     totalSpentTalkingTime += minute;
   }
 }
 
-/*
-Si la cantidad es mayor a 0, agrega la cantidad al total de mensajes enviados.
-*/
-void Operator::addTotalMessageSent(int quantity){
-  if(quantity > 0){
+/**
+ * @brief Adds the total message sent
+ *
+ * @param quantity
+ */
+void Operator::addTotalMessageSent(int quantity)
+{
+  if (quantity > 0)
+  {
     totalMessageSent += quantity;
   }
 }
 
-/*
-Si la cantidad es mayor a 0, agrega la cantidad a los GB's totales empleados.
-*/
-void Operator::addTotalInternetUsage(double amount){
-  if(amount > 0){
+/**
+ * @brief Adds the total internet usage
+ *
+ * @param amount
+ */
+void Operator::addTotalInternetUsage(double amount)
+{
+  if (amount > 0)
+  {
     totalInternetUsage += amount;
   }
 }
 
-/*
-Regresa un string con el siguiente formato: 
-"Operator #id : totalSpentTalkingTime totalMessageSent totalInternetUsage". 
-Todas las cantidades de punto flotantes deben tener una precisión de dos números decimales.
-*/
-string Operator::toString() const{
+/**
+ * @brief Returns a string with the information of the operator
+ *
+ * @return string
+ */
+string Operator::toString() const
+{
   stringstream aux;
 
   aux << fixed << setprecision(2);
-  aux << "Operator " << id << ": " << fixed << setprecision(2) << totalSpentTalkingTime << " " << totalMessageSent << " " << totalInternetUsage << endl; 
-  
+  aux << "Operator " << id << ": " << fixed << setprecision(2) << totalSpentTalkingTime << " " << totalMessageSent << " " << totalInternetUsage << endl;
+
   return aux.str();
 }
 
