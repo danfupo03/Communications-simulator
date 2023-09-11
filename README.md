@@ -1,221 +1,221 @@
 ![Tec de Monterrey](images/logotecmty.png)
-# Situación problema: Simulación de un sistema de comunicación celular.
+# Problem Statement: Simulation of a Cellular Communication System.
 
-## <span style="color: rgb(26, 99, 169);">¿Qué tengo que hacer?</span>
-En este repositorio encontrarás una serie de carpetas y archivos que necesitarás para el desarrollo del proyecto.
-* *test_cases*: En este directorio encontrarás los archivos de entrada (`input0.txt`, `input1.txt`, `input2.txt`, `input3.txt`, `input4.txt`, `input5.txt`, `input6.txt`) que utilizaremos para probar el sistema completo. Adicionalmente están las salida esperadas para cada uno de los archivos de entrada (`output0.txt`, `output1.txt`, `output2.txt`, `output3.txt`, `output4.txt`, `output5.txt`, `output6.txt`).
-* *unit_test*: En este directorio se encuentran los archivos de pruebas de unidad para cada una de las clases que tienes que desarrollar. Estos archivos de prueba te permiten verificar si tu implementación es correcta.
-* *archivos cabecera (o header)*: Archivos en los que se realiza la implementación de cada clase.
-* `main.cpp`: Archivo que contiene la función `main`. En este archivo se realiza la lectura/escritura de archivos.
+## <span style="color: rgb(26, 99, 169);">What do I need to do?</span>
+In this repository, you will find a series of folders and files that you will need for the project development.
+* *test_cases*: In this directory, you will find input files (`input0.txt`, `input1.txt`, `input2.txt`, `input3.txt`, `input4.txt`, `input5.txt`, `input6.txt`) that we will use to test the complete system. Additionally, there are expected outputs for each of the input files (`output0.txt`, `output1.txt`, `output2.txt`, `output3.txt`, `output4.txt`, `output5.txt`, `output6.txt`).
+* *unit_test*: In this directory are the unit test files for each of the classes that you have to develop. These test files allow you to verify if your implementation is correct.
+* *header files*: Files in which the implementation of each class is carried out.
+* `main.cpp`: File containing the `main` function. File reading/writing is done in this file.
 
-En estos archivos deberás desarrollar la implementación de cada una de las clases que integran la solución del problema presentado en esta actividad. En la parte superior de cada archivo coloca deberás, en comentarios, tus datos. Por ejemplo:
+In these files you must develop the implementation of each of the classes that make up the solution to the problem presented in this activity. At the top of each file, you must place your data in comments. For example:
 ```
-// =========================================================
+// ===========================================================
 // File: one_header.h
 // Author: Edward Elric - A00123456
 // Date: 01/01/2021
 // Description: This file implements some functions.
-// =========================================================
+// ===========================================================
 ```
 
-## <span style="color: rgb(26, 99, 169);">Introducción</span>
-Cómo, de seguro, ya habrás oído, vivimos en un mundo donde las revoluciones tecnológicas ocurren todos los días. Una de las revoluciones más importantes fue, sin lugar a dudas, los sistemas de comunicación celular. En este proyecto, vamos a implementar una versión simple de un sistema de comunicación celular.
+## <span style="color: rgb(26, 99, 169);">Introduction</span>
+As I'm sure you've already heard, we live in a world where technological revolutions happen every day. One of the most important revolutions was, without a doubt, cellular communication systems. In this project, we are going to implement a simple version of a cellular communication system.
 
-En este sistema existen *clientes*, *operadores* y *facturas* que pertenecen a un cliente determinado. Los clientes pueden hablar entre ellos, enviarse mensajes o conectarse a Internet a través de sus dispositivos móviles. Los operadores tienen costos únicos para todas estas acciones. Cada cliente tendrá una única factura que almacena y realiza las operaciones necesarias sobre sus gastos.
+In this system there are *customers*, *operators* and *invoices* that belong to a specific customer. Customers can talk to each other, send messages, or connect to the Internet through their mobile devices. Traders have unique costs for all of these actions. Each client will have a single invoice that stores and performs the necessary operations on their expenses.
 
-Tu solución tomará la entrada de un archivo de texto, realizará las operaciones e imprimirá la información necesario en un archivo de texto de salida. El nombre de ambos archivos, los tomará como argumento del programa. En otras palabras, **no habrá ninguna entrada dada con el teclado mientras se ejecuta el programa**.
+Your solution will take input from a text file, perform the operations, and print the necessary information to an output text file. The name of both files will be taken as the program argument. In other words, **there will be no input given with the keyboard while the program is running**.
 
-Ten en cuenta que habrá varias clases. Por lo tanto, trabajarás con varios archivos cabecera (o header). Los nombres de las variables de instancia y métodos se proporcionarán en este documento, así como en el encabezado de la clase que se encuentra en cada archivo cabecera. Aunque esto no significa que no puedas agregar métodos o campos adicionales.
+Please note that there will be several classes. Therefore, you will work with several header files. The names of the instance variables and methods will be provided in this document as well as in the class header found in each header file. Although this doesn't mean you can't add additional methods or fields.
 
-### <span style="color: rgb(26, 99, 169);">**Clases**</span>
-Existen 5 clases interactuando entre sí en este proyecto:
+### <span style="color: rgb(26, 99, 169);">**Classes**</span>
+There are 5 classes interacting with each other in this project:
 * `Customer`.
 * `Operator`.
-* `VoxOperator` (derivado de `Operator`).
-* `InternetOperator` (derivado de `Operator`).
+* `VoxOperator` (derived from `Operator`).
+* `InternetOperator` (derived from `Operator`).
 * `Bill`.
 
-Ten en cuenta que será necesario hacer los cálculos necesarios mediante el uso de los métodos correspondiente en las clases `Customer`, `Operator` (y derivados) o `Bill`, no en el programa principal.
+Note that it will be necessary to do the necessary calculations by using the corresponding methods in the `Customer`, `Operator` (and derivatives) or `Bill` classes, not in the main program.
 
 #### <span style="color: rgb(26, 99, 169);">**Bill**</span>
-La clase `Bill` cuenta con las siguientes variables de estado:
-* `limitAmount` : Límite de crédito.
-* `currentDebt` : Deuda actual.
-* `totalMoneySpent` : Dinero total que el cliente ha pagado a lo largo del tiempo.
+The `Bill` class has the following state variables:
+* `limitAmount`: Credit limit.
+* `currentDebt`: Current debt.
+* `totalMoneySpent`: Total money the customer has paid over time.
 
-La clase cuenta con los siguientes métodos:
-* Constructor con un parámetro (el límite de crédito). Este método deberá inicializar el resto de variables a 0.
-* Constructor de copia.
-* Métodos de acceso para todas las variables de instancia. (Si consideras necesario agregar métodos de modificación, adelante).
-* `add(double amount)`: Agrega cargos a la factura. Si la cantidad es menor o igual 0, no deberá hacer cambios.
-* `pay(double amount)`: Reduce la deuda en la cantidad dada. Si la cantidad es menor o igual a 0, no deberá hacer cambios. Nunca se podrá pagar más cantidad que la deuda actual.
-* `changeTheLimit(double amount)`: Cambia el límite de crédito, siempre y cuando sea mayor a la deuda actual. Si la cantidad es menor o igual a 0, no deberá hacer cambios.
-* `check(double amount)`: Regresa verdadero si la cantidad más la deuda actual no existe el límite de crédito.
+The class has the following methods:
+* Constructor with one parameter (credit limit). This method must initialize the rest of the variables to 0.
+* Copy builder.
+* Accessor methods for all instance variables. (If you consider it necessary to add modification methods, go ahead).
+* `add(double amount)`: Add charges to the invoice. If the quantity is less than or equal to 0, you should not make changes.
+* `pay(double amount)`: Reduces the debt by the given amount. If the quantity is less than or equal to 0, you should not make changes. You can never pay more than the current debt.
+* `changeTheLimit(double amount)`: Change the credit limit, as long as it is greater than the current debt. If the quantity is less than or equal to 0, you should not make changes.
+* `check(double amount)`: Returns true if the amount plus the current debt does not exist the credit limit.
 
 #### <span style="color: rgb(26, 99, 169);">**Operator**</span>
-Si bien, existen dos tipos de operadores, aquellos que dan un mayor soporte a llamadas y mensajes(*VOX*) y aquellos que dan un mayor soporte al uso de Internet (*INTERNET*), todos comparte características comunes. La clase `Operator` define estas características. Las variables de estado con las que cuenta son:
-* `id`: Identificador único del operador.
-* `discountRate`: Porcentaje de descuento a aplicar.
-* `talkingCharge`: El costo por minuto de llamada.
-* `messageCost`: El costo por envío de mensaje.
-* `networkCharge`: El costo por GB utilizado.
-* `totalSpentTalkingTime`: El tiempo total que se ha empleado en llamadas.
-* `totalMessageSent`: Los mensajes totales que se han enviado.
-* `totalInternetUsage`: El total de GB's utilizados.
-* `type`: Tipo de operador (VOX o INTERNET).
+Although there are two types of operators, those that provide greater support for calls and messages (*VOX*) and those that provide greater support for Internet use (*INTERNET*), they all share common characteristics. The `Operator` class defines these characteristics. The state variables it has are:
+* `id`: Unique identifier of the operator.
+* `discountRate`: Discount percentage to apply.
+* `talkingCharge`: The cost per call minute.
+* `messageCost`: The cost per message sending.
+* `networkCharge`: The cost per GB used.
+* `totalSpentTalkingTime`: The total time spent on calls.
+* `totalMessageSent`: The total messages that have been sent.
+* `totalInternetUsage`: The total GB's used.
+* `type`: Type of operator (VOX or INTERNET).
 
-La clase cuenta con los siguientes métodos:
-* Constructor con 6 parámetros. Recibe el id, el costo por minuto de llamada, el costo por envío de mensaje, el costo por GB, el porcentaje de descuento y el tipo de operador. El resto de las variables debe inicializarse a 0.
-* Constructor de copia.
-* Métodos de acceso para todas las variables de instancia. (Si consideras necesario agregar métodos de modificación, adelante).
-* `addTalkingTime(int minute)`: Si la cantidad es mayor a 0, agrega la cantidad al tiempo total que se ha empleado en llamadas.
-* `addTotalMessageSent(int quantity)`: Si la cantidad es mayor a 0, agrega la cantidad al total de mensajes enviados.
-* `addTotalInternetUsage(double amount)`: Si la cantidad es mayor a 0, agrega la cantidad a los GB's totales empleados.
-* `toString()`: Regresa un string con el siguiente formato: "Operator #id : totalSpentTalkingTime totalMessageSent addTotalInternetUsage". Todas las cantidades de punto flotantes deben tener una precisión de dos números decimales.
-* `virtual double calculateTalkingCost(int, int) = 0;`: Función virtual. Debe ser implementada en las clases derivadas.
-* `virtual double calculateMessageCost(int, int, int) = 0;`: Función virtual. Debe ser implementada en las clases derivadas.
-* `virtual double calculateNetworkCost(double) = 0;`: Función virtual. Debe ser implementada en las clases derivadas.
+The class has the following methods:
+* Constructor with 6 parameters. Receive the ID, the cost per call minute, the cost per message sending, the cost or by GB, the discount percentage and the type of operator. The rest of the variables must be initialized to 0.
+* Copy builder.
+* Accessor methods for all instance variables. (If you consider it necessary to add modification methods, go ahead).
+* `addTalkingTime(int minute)`: If the amount is greater than 0, adds the amount to the total time spent on calls.
+* `addTotalMessageSent(int quantity)`: If the quantity is greater than 0, add the quantity to the total messages sent.
+* `addTotalInternetUsage(double amount)`: If the amount is greater than 0, add the amount to the total GB's used.
+* `toString()`: Returns a string with the following format: "Operator #id : totalSpentTalkingTime totalMessageSent addTotalInternetUsage". All floating point quantities must have a precision of two decimal numbers.
+* `virtual double calculateTalkingCost(int, int) = 0;`: Virtual function. It must be implemented in derived classes.
+* `virtual double calculateMessageCost(int, int, int) = 0;`: Virtual function. It must be implemented in derived classes.
+* `virtual double calculateNetworkCost(double) = 0;`: Virtual function. It must be implemented in derived classes.
 
 #### <span style="color: rgb(26, 99, 169);">**VoxOperator**</span>
-Este tipo de operador se especializa en aquellas personas que hacen un uso más intensivo de las llamadas y los mensajes de texto. Deriva de `Operator`.
+This type of operator specializes in those people who make more intensive use of calls and text messages. Derived from `Operator`.
 
-La clase cuenta con los siguientes métodos:
-* Constructor con 6 parámetros. Recibe el id, el costo por minuto de llamada, el costo por envío de mensaje, el costo por GB, el porcentaje de descuento y el tipo de operador. Debe invocar al constructor de la clase superior.
-* Constructor de copia. Debe invocar al constructor de la clase superior.
-* `calculateTalkingCost(int minute, int age)`: Si la cantidad de minutos o la edad es menor igual a 0, regresará 0. En caso contrario, calcula el costo de la llamada tomando en cuenta el costo por minuto definido. Si la persona es menor a 18 o mayor a 65, le aplica el descuento definido.
-* `double calculateMessageCost(int quantity, int thisOpId, int otherOpId)`: Si la cantidad de mensajes es menor igual a 0, regresará 0. En caso contrario, calcula el costo de enviar los mensajes tomando en cuenta el costo por envío definido. Si los mensajes son enviados al mismo operador, le aplica el descuento definido.
-* `calculateNetworkCost(double amount)`: Si la cantidad de GB es mayor a 0, calcula el costo por GB.
+The class has the following methods:
+* Constructor with 6 parameters. Receive the ID, the cost per call minute, the cost per message sending, the cost per GB, the discount percentage and the type of operator. You must invoke the constructor of the parent class.
+* Copy builder. You must invoke the constructor of the parent class.
+* `calculateTalkingCost(int minute, int age)`: If the number of minutes or the age is less than 0, it will return 0. Otherwise, it calculates the cost of the call taking into account the defined cost per minute. If the person is under 18 or over 65, the defined discount applies.
+* `double calculateMessageCost(int quantity, int thisOpId, int otherOpId)`: If the number of messages is less than 0, it will return 0. Otherwise, it calculates the cost of sending the messages taking into account the defined cost per sending. If the messages are sent to the same operator, the defined discount applies.
+* `calculateNetworkCost(double amount)`: If the number of GB is greater than 0, calculate the cost per GB.
 
 #### <span style="color: rgb(26, 99, 169);">**InternetOperator**</span>
-Este tipo de operador se especializa en aquellas personas que hacen un uso más intensivo de Internet. Deriva de `Operator`.
+This type of operator specializes in those people who make more intensive use of the Internet. Derived from `Operator`.
 
-La clase cuenta con los siguientes métodos:
-* Constructor con 6 parámetros. Recibe el id, el costo por minuto de llamada, el costo por envío de mensaje, el costo por GB, el porcentaje de descuento y el tipo de operador. Debe invocar al constructor de la clase superior.
-* Constructor de copia. Debe invocar al constructor de la clase superior.
-* `calculateTalkingCost(int minute, int age)`: Si la cantidad de minutos o la edad es menor igual a 0, regresará 0. En caso contrario, calcula el costo de la llamada tomando en cuenta el costo por minuto definido. Si la cantidad de minutos es menor a 2, le aplica el descuento definido.
-* `double calculateMessageCost(int quantity, int thisOpId, int otherOpId)`: Si la cantidad de mensajes es menor igual a 0, regresará 0. En caso contrario, calcula el costo de enviar los mensajes tomando en cuenta el costo por envío definido. Si la cantidad de mensajes enviados es menor a 3, le aplica el descuento definido.
-* `calculateNetworkCost(double amount)`: Si la cantidad de GB es menor o igual a cero, regresará 0. Sólo se cobrará la cantidad de GB que exceda el limite de 1 GB.
+The class has the following methods:
+* Constructor with 6 parameters. Receive the ID, the cost per call minute, the cost per message sending, the cost per GB, the discount percentage and the type of operator. You must invoke the constructor of the parent class.
+* Copy builder. You must invoke the constructor of the parent class.
+* `calculateTalkingCost(int minute, int age)`: If the number of minutes or the age is less than 0, it will return 0. Otherwise, it calculates the cost of the call taking into account the defined cost per minute. If the number of minutes is less than 2, the defined discount applies.
+* `double calculateMessageCost(int quantity, int thisOpId, int otherOpId)`: If the number of messages is less than 0, it will return 0. Otherwise, it calculates the cost of sending the messages taking into account the defined cost per sending. If the number of messages sent is less than 3, the defined discount applies.
+* `calculateNetworkCost(double amount)`: If the amount of GB is less than or equal to zero, it will return 0. Only the amount of GB that exceeds the 1 GB limit will be charged.
 
 #### <span style="color: rgb(26, 99, 169);">**Customer**</span>
-La clase `Customer` cuenta con las siguientes variables de estado:
-* `id` : Identificador del cliente.
-* `name`: Nombre del cliente.
-* `age` : Edad del cliente.
-* `totalSpentTalkingTime`: El tiempo total que este cliente ha empleado en llamadas.
-* `totalMessageSent`: Los mensajes totales que este cliente ha enviado.
-* `totalInternetUsage`: El total de GB's utilizados por este cliente.
-* `op`: Apuntador a un objeto de la clase Operator. El operador que da servicio a este cliente.
-* `bill`: Apuntador a un objeto de la clase Bill. La factura del cliente.
+The `Customer` class has the following state variables:
+* `id`: Client identifier.
+* `name`: Name of the client.
+* `age`: Age of the client.
+* `totalSpentTalkingTime`: The total time this client has spent on calls.
+* `totalMessageSent`: The total messages this client has sent.
+* `totalInternetUsage`: The total GB's used by this client.
+* `op`: Pointer to an object of the Operator class. The operator that provides service to this client.
+* `bill`: Pointer to an object of the Bill class. The client's invoice.
 
-La clase cuenta con los siguientes métodos:
-* Constructor con 5 parámetros. Recibe el id, el nombre, la edad, el operador y el límite de crédito. Se debe crear el objeto de la clase *Bill*.
-* Constructor de copia.
-* Destructor. Debe eliminar la factura. Todos los apuntadores debe ser igualados a nulo.
-* Métodos de acceso para todas las variables de instancia. (Si consideras necesario agregar métodos de modificación, adelante).
-* Método de modificación para la variable *op*.
-* `talk (int minutes, Customer &other)`: Si la cantidad es mayor a 0 y `other` es un cliente diferente, se calcula el costo por los minutos que duró la llamada. Si todavía hay límite de crédito en la factura, deberá agregar el costo a la factura y agregar los minutos empleados al conteo de nuestro cliente y su operador. Si el operador de nuestro cliente y el `other`son diferentes, también deberá de agregarse esta cantidad al otro operador.
-* `message(int quantity, const Customer &other)`: Si la cantidad es mayor a 0 y `other` es un cliente diferente, se calcula el costo por los mensajes enviados. Si todavía hay límite de crédito en la factura, deberá agregar el costo a la factura y agrega los mensajes enviados en el conteo del cliente y del operador.
-* `connection(double amount)`: Si la cantidad es mayor a 0, se calcula el costo por el uso de Internet. Si todavía hay límite de crédito en la factura, deberá agregar el costo a la factura y agrega los GB utilizados tanto en el conteo del cliente y del operador.
-* `toString()`: Regresa un string con el siguiente formato: "Customer #id : totalMoneySpend currentDebt". Todas las cantidades de punto flotantes deben tener una precisión de dos números decimales.
+The class has the following methods:
+* Constructor with 5 parameters. Receive the id, name, age, operator and credit limit. The object of class *Bill* must be created.
+* Copy builder.
+* Destroyer. You must delete the invoice. All pointers must be set to null.
+* Accessor methods for all instance variables. (If you consider it necessary to add modification methods, go ahead).
+* Modification method for the *op* variable.
+* `talk (int minutes, Customer &other)`: If the quantity is greater than 0 and `other` is a different client, the cost is calculated by the minutes the call lasted. If there is still a credit limit on the invoice, you will need to add the cost to the invoice and add the minutes used to the count of our customer and their operator. If our client's operator and the 'other' are different, this amount must also be added to the other operator.
+* `message(int quantity, const Customer &other)`: If the quantity is greater than 0 and `other` is a different customer, the cost for the messages sent is calculated. If there is still a credit limit on the invoice, you will need to add the cost to the invoice and add the messages sent to the customer and operator count.
+* `connection(double amount)`: If the amount is greater than 0, the cost for Internet use is calculated. If there is still a credit limit on the invoice, you will need to add the cost to the invoice and add the GB used to both the customer and operator counts.
+* `toString()`: Returns a string with the following format: "Customer #id : totalMoneySpend currentDebt". All floating point quantities must have a precision of two decimal numbers.
 
 #### <span style="color: rgb(26, 99, 169);">**main.cpp**</span>
-En el archivo *main.cpp* se realizarán las operaciones generales de entrada y salida. Leerás de un archivo de entrada las operaciones sobre la simulación, las deberás realizar e imprimirás los resultados en el archivo de salida.
+General input and output operations will be performed in the *main.cpp* file. You will read the simulation operations from an input file, perform them, and print the results in the output file.
 
-Las operaciones se detallan más adelante. El nombre de los archivos de entrada y salida se darán como argumentos del programa a través de la línea de comandos. Si el archivo de entrada no existe, el programa termina.
+The operations are detailed below. The name of the input and output files will be given as program arguments via the command line. If the input file does not exist, the program terminates.
 
-Deberás manejar dos vectores, uno para apuntadores a objetos `Customer` y otro para apuntadores a objetos `Operator`.
+You must handle two vectors, one for pointers to `Customer` objects and another for pointers to `Operator` objects.
 
-#### <span style="color: rgb(26, 99, 169);">**Entrada**</span>
-Vas a leer el archivo de entrada elemento por elemento.
+#### <span style="color: rgb(26, 99, 169);">**Input**</span>
+You are going to read the input file element by element.
 
-La primera línea tiene tres números enteros, `C`, `O` y `N`. El número `C` represnta el número de clientes que estarán en la simulación. El segundo número, `O`, indica el número de operadores en la simulación. El tercer número, `N`, representa el número de eventos a simular.
+The first line has three integers, `C`, `O` and `N`. The number 'C' represents the number of clients that will be in the simulation. The second number, `O`, indicates the number of operators in the simulation. The third number, `N`, represents the number of events to simulate.
 
-Las siguientes `N` líneas serán algunas de las siguientes operaciones:
-1. Creando un nuevo cliente.
-2. Creando un nuevo operador.
-3. Un cliente puede hablar con otro cliente.
-4. Un cliente puede enviar un mensaje a otro cliente.
-5. Un cliente puede conectarse a Internet.
-6. Un cliente puede pagar sus facturas.
-7. Un cliente puede cambiar de operador.
-8. Un cliente puede cambiar su límite de Factura.
+The next `N` lines will be some of the following operations:
+1. Creating a new client.
+2. Creating a new operator.
+3. A customer can talk to another customer.
+4. A client can send a message to another client.
+5. A client can connect to the Internet.
+6. A customer can pay his bills.
+7. A customer can change operators.
+8. A customer can change their Invoice limit.
 
-##### <span style="color: rgb(26, 99, 169);">**1. Creando un nuevo cliente**</span>
-Esta línea contiene un 1 seguido del nombre del cliente, la edad, el identificador del operador y la cantidad límite de crédito del cliente.
+##### <span style="color: rgb(26, 99, 169);">**1. Creating a new client**</span>
+This line contains a 1 followed by the customer's name, age, carrier ID, and the customer's credit limit amount.
 
 ```
-1 <name> <age> <opeatorId> <limitingAmount>
+1 <name> <age> <operatorId> <limitingAmount>
 ```
-Toma en cuenta que el identificador del cliente será el orden de creación. Por ejemplo, el primer cliente creado debe tener id 0 y debe colocarse la posición 0 del vector. Además, no existe ninguna operación para crear un objeto `Bill` (lo debes realizar en el constructor del cliente).
+Take into account that the client identifier will be the order of creation. For example, the first client created must have id 0 and position 0 of the vector must be placed. Additionally, there is no operation to create a `Bill` object (you must do it in the client's constructor).
 
-##### <span style="color: rgb(26, 99, 169);">**2. Creando un nuevo operador**</span>
-Esta línea contiene un 2 seguido del tipo de operador (1 = VOX, 2 = INTERNET), cargo por llamada, cargo por mensaje, cargo por uso de internet y el descuento a aplicar.
+##### <span style="color: rgb(26, 99, 169);">**2. Creating a new operator**</span>
+This line contains a 2 followed by the type of operator (1 = VOX, 2 = INTERNET), charge per call, charge per message, charge for internet use and the discount to be applied.
 
 ```
 2 <opType> <talkingCharge> <messageCost> <networkCharge> <discountRate>
 ```
-Toma en cuenta que el identificador del operador será el orden de creación. Por ejemplo, el primer operador creado debe tener Id 0 y debe colocarse en la posición 0 del vector.
+Take into account that the operator identifier will be the order of creation. For example, the first operator created must have Id 0 and must be placed at position 0 of the vector.
 
-##### <span style="color: rgb(26, 99, 169);">**3. Un cliente puede hablar con otro cliente**</span>
-Esta línea contiene un 3 seguido del id del primer cliente (origen), el id del segundo cliente (destino) y el tiempo de la llamada.
+##### <span style="color: rgb(26, 99, 169);">**3. A customer can talk to another customer**</span>
+This line contains a 3 followed by the id of the first client (origin), the id of the second client (destination), and the time of the call.
 
 ```
 3 <idCustomer1> <idCustomer2> <time>
 ```
-##### <span style="color: rgb(26, 99, 169);">**4. Un cliente envía un mensaje a otro cliente**</span>
-Esta línea contiene un 4 seguido del id del primer cliente (origen), el id del segundo cliente (destino) y la cantidad de mensajes enviados.
+##### <span style="color: rgb(26, 99, 169);">**4. A client sends a message to another client**</span>
+This line contains a 4 followed by the id of the first client (source), the id of the second client (destination), and the number of messages sent.
 
 ```
 4 <idCustomer1> <idCustomer2> <quantity>
 ```
 
-##### <span style="color: rgb(26, 99, 169);">**5. Un cliente se conecta a Internet**</span>
-Esta línea contiene un 5 seguido del id del cliente y la cantidad de Internet utilizada en GB.
+##### <span style="color: rgb(26, 99, 169);">**5. A client connects to the Internet**</span>
+This line contains a 5 followed by the client id and the amount of Internet used in GB.
 
 ```
 5 <idCustomer> <amount>
 ```
 
-##### <span style="color: rgb(26, 99, 169);">**6. Un cliente paga sus facturas**</span>
-Esta línea contiene un 6 seguido del id del cliente y la cantidad de dinero que el cliente quiere pagar.
+##### <span style="color: rgb(26, 99, 169);">**6. A client pays his bills**</span>
+This line contains a 6 followed by the customer id and the amount of money the customer wants to pay.
 
 ```
 6 <idCustomer> <amount>
 ```
-##### <span style="color: rgb(26, 99, 169);">**7. Un cliente cambia de operador**</span>
-Esta línea contiene un 7 seguido del id del cliente y el id del operador.
+##### <span style="color: rgb(26, 99, 169);">**7. A client changes operator**</span>
+This line contains a 7 followed by the customer id and the operator id.
 
 ```
 7 <idCustomer> <idOperator>
 ```
-##### <span style="color: rgb(26, 99, 169);">**8. Un cliente cambia su límite de factura**</span>
-Esta línea contiene un 8 seguido del id del cliente y el nuevo límite.
+##### <span style="color: rgb(26, 99, 169);">**8. A customer changes their invoice limit**</span>
+This line contains an 8 continuous of the client id and the new limit.
 
 ```
 8 <idCustomer> <amount>
 ```
-#### <span style="color: rgb(26, 99, 169);">**Salida**</span>
-Debes calcular lo siguiente e imprimirlo en el archivo de salida.
+#### <span style="color: rgb(26, 99, 169);">**Output**</span>
+You need to calculate the following and print it to the output file.
 
-Por cada operador, debes imprimir la cantidad de tiempo de llamadas que atiendieron, la cantidad de mensajes enviados a través de ese operator y la cantidad de uso de Internet en términos de GB proporcionados por el operador.
+For each operator, you should print the amount of call time they answered, the number of messages sent through that operator, and the amount of Internet usage in terms of GB provided by the operator.
 ```
-Operator <id>:  <talkingTime> <totalMessages> <totalMBs>
+Operator <id>: <talkingTime> <totalMessages> <totalMBs>
 ```
 
-Por cada cliente, debes imprimir cuánto dindero ha gastado en pagar su factura y la deuda actual al final de la simulación.
+For each customer, you must print how much money they have spent on paying their bill and current debt at the end of the simulation.
 ```
-Customer <id>:  <totalMoneySpend> <currentDebt>
+Customer <id>: <totalMoneySpend> <currentDebt>
 ```
-Posteriormente, desplegar el id del cliente que más habla y la cantidad de tiempo en minutos (si dos clientes son iguales, debes imprimir el que tiene una id más pequeña).
+Subsequently, display the id of the client who talks the most and the amount of time in minutes (if two clients are the same, you should print the one with a smaller id).
 ```
-<name of the customer>:  <total talking time>
+<name of the customer>: <total talking time>
 ```
-A continuación, desplegar el id del cliente que más mensajes envía y la cantidad de mensajes enviados (si dos clientes son iguales, debes imprimir el que tiene una id más pequeña).
+Next, display the id of the client that sends the most messages and the number of messages sent (if two clients are the same, you should print the one with a smaller id).
 ```
-<name of the customer>:  <number of messages>
+<name of the customer>: <number of messages>
 ```
-En seguida, desplegar el id del cliente que más se conecta a Internet y la cantidad de GBs (si dos clientes son iguales, debes imprimir el que tiene una id más pequeña).
+Next, display the id of the client that connects to the Internet the most and the number of GBs (if two clients are the same, you should print the one with a smaller id).
 ```
 <name of the customer>: <connection amount>
 ```
-Por último, deberás eliminar todos los apuntadores que existan y cerrar los archivos de entrada y salida.
+Finally, you must delete all existing pointers and close the input and output files.
